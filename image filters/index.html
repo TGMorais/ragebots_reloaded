@@ -1,0 +1,63 @@
+<style>
+img{
+	image-rendering:-webkit-optimize-contrast;
+}
+/*#canvas_big { width: 300px; }*/
+</style>
+<div style="width:100px;height:300px;">
+<img width="70px" height="70px" src="https://services.sapo.pt/Codebits/botmake/01,,,04,05,06,07,08,"></img>
+<tr>
+  <!-- This is a standard html5 canvas -->
+  <br />
+  <!-- This canvas is oversampled. -->
+  <!-- Its internal size is 600 but it is set to display at 300 -->
+  <canvas id="canvas_big" width=600 height=400></canvas>
+  <canvas id="canvas_big2" width=600 height=400></canvas>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script>
+
+	var img2 = new Image();
+/* 	img.width="70"
+	img.height="70" */
+	img2.onload = function() {
+		  context = document.getElementById('canvas_big').getContext('2d')
+		  //context.scale(2,2)
+		  context.drawImage(img2,150,10)
+	}
+	img2.src = 'img/body/1.png';
+
+
+	
+/* 	var img = new Image();
+/* 	img.width="70"
+	img.height="70" */
+	img.onload = function() {
+		  context = document.getElementById('canvas_big').getContext('2d')
+		  context.save()
+		  context.scale(2,2)
+		  context.drawImage(img,0,0,60,60)
+		  context.restore()
+	}
+	img.src = 'https://services.sapo.pt/Codebits/botmake/01,,,04,05,06,07,08,';
+	
+	
+	var img3 = new Image();
+/* 	img.width="70"
+	img.height="70" */
+	img3.onload = function() {
+		  context = document.getElementById('canvas_big2').getContext('2d')
+		  context.save()
+		  //context.scale(2,2)
+		  context.drawImage(img3,220,10,60,60)
+		  context.drawImage(img3,55,55,290,280,200,75,45,45)
+		  //context.scale(1,1)
+		  context.restore()
+		  context.save()
+		  context.scale(-1,1)
+		  context.drawImage(img3,55,55,290,280,(200*-1),75,45,45)
+		  context.restore()
+	}
+	img3.src = 'https://services.sapo.pt/Codebits/botmake/01,,,04,05,06,07,08,'; */
+</script>
