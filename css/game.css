@@ -1,0 +1,133 @@
+/*** MAIN PAGE STYLES ***/
+/* First Area, the Game Area (Canvas plus TextArea) */
+.gameArea
+{
+    height: auto;
+    background-color:white;
+    float: left;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    margin:10px 0px 0px 10px;
+}
+canvas {
+    display: block;
+    width:880px;
+    height: 500px;
+    border:1px solid black;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+/* Area with TextArea */
+.code
+{
+    height: 200px;
+    padding: 6px 2px 2px 2px;
+}
+
+.code textarea
+{
+    width: 99%;
+    height: 180px;
+}
+
+/* Second Area, the Menu Area (First Menu with Players and Second menu with current Functions) */
+.menu
+{
+    height:700px;
+    width: 240px;
+    float:left;
+    margin: 10px 0px 0px 5px;
+}
+
+.menu > div
+{
+    height: 300px;
+    border-radius: 15px;
+}
+
+#info
+{
+    height: 405px;
+    background-color:black;
+    padding-top:5px;
+}
+
+#info span
+{
+    padding-left: 5px;
+    color: white;
+}
+
+#info ul
+{
+    margin:10px;
+    color:black;
+    max-height: 300px;
+    overflow:hidden;
+}
+
+#info li
+{
+    padding: 5px;
+    margin: 2px 0px;
+    background-color: #CCCCCC;    
+}
+
+a#submit
+{
+    margin: 10px;
+    position:absolute;
+    padding:22px 0px;
+    width: 220px;
+    color: white;
+    text-align: center;
+    background-color:red;
+    text-decoration: none;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+#users
+{
+    background-color:#82BA51;
+}
+
+#users ul img, #users ul div
+{
+    float:left;
+}
+
+#users img
+{
+    height: 35px;
+    width: 35px;
+    margin: 0px 3px;
+}
+
+#user img
+{float: left;}
+#user
+{padding: 10px 0px 0px 20px;}
+
+.score
+{
+    width: 15px;
+    height:auto;
+    text-align:center;
+    padding: 5px;
+}
+.name
+{
+padding: 5px;
+    
+}
+#users ul
+{
+    margin: 40px 0px;
+    height: 200px;
+    overflow:hidden;
+}
+#users li
+{
+    height: 40px;
+}

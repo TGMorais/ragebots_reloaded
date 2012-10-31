@@ -5,11 +5,57 @@
 		<title>HTML5 Canvas playground</title>
 		
 		 <link rel="stylesheet" href="css/main.css">
+		 <link rel="stylesheet" href="css/login.css">
+		 <link rel="stylesheet" href="css/reset.css">
+		 <link rel="stylesheet" href="css/elegant.css">
+		 <link rel="stylesheet" href="css/codemirror.css">
+		 <link rel="stylesheet" href="css/game.css">
+		 <!-- <link href="css/bootstrap.css" rel="stylesheet" media="screen"> -->
+		 <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
+		 <link href='http://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet' type='text/css'>
+		 <link href='http://fonts.googleapis.com/css?family=Coda' rel='stylesheet' type='text/css'>
+		 <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div id="container">
+	<div class="page">
+		<!-- Game -->
+		<div id="container" style="display:none">
 			<canvas id="gameCanvas" width="800" height="400"></canvas>
 		</div>
+		<!-- Login -->
+		<div id="login">
+
+			<form id="loginform" action="javascript:validate()">
+				<fieldset>
+
+				<div class="header">
+						<img class="logo" src="assets/img/loginbot.png" />
+						<div class="title"><h1>Ragebots </h1><h3>Reloaded!</h3></div>
+				</div>
+
+				<div class="auth-details">
+				   <label for="username" accesskey="e">Email</label>
+					<div class="editor-field">
+						<input type="text" id="emailinput" name="mail" style="width:300px;" value="">
+					</div>
+
+					<label for="password" accesskey="p">Password</label>
+					<div class="editor-field">
+						<input type="password" id="passwordinput" name="password" style="width:300px;">
+					</div>
+				</div>
+					<div class="footer">
+						<p class="message">
+							No account? Use 'Guest' - '123'. 
+						</p>
+						<p class="loginbutton">
+							<input class="btn btn-success" type="submit" name="go" value="Login" />
+						</p>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 		<!-- <div id="imagec"><img src="https://services.sapo.pt/Codebits/botmake/01,,,03,06,03,07,08," width="60" height="60" id="imageid"></img></div> -->
 	</body>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
@@ -19,7 +65,7 @@
 	<script  type="text/javascript">
 		$(document).ready(function(){
 		//init them all
-			Game.GameStart();
+			//Game.GameStart();
 			//alert('hi')
 		});
 	</script>
