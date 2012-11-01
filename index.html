@@ -4,12 +4,12 @@
 		<meta charset="utf-8"/>
 		<title>HTML5 Canvas playground</title>
 		
-		 <link rel="stylesheet" href="css/main.css">
 		 <link rel="stylesheet" href="css/login.css">
 		 <link rel="stylesheet" href="css/reset.css">
 		 <link rel="stylesheet" href="css/elegant.css">
 		 <link rel="stylesheet" href="css/codemirror.css">
 		 <link rel="stylesheet" href="css/game.css">
+		 <link rel="stylesheet" href="css/bootstrap_bar.css">
 		 <!-- <link href="css/bootstrap.css" rel="stylesheet" media="screen"> -->
 		 <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
 		 <link href='http://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet' type='text/css'>
@@ -20,7 +20,7 @@
 	<div class="page">
 		<!-- Game -->
 		<div id="container" style="display:none">
-			<canvas id="gameCanvas" width="800" height="400"></canvas>
+			<canvas id="gameCanvas" width=800 height=400></canvas>
 		</div>
 		<!-- Login -->
 		<div id="login">
@@ -44,16 +44,24 @@
 						<input type="password" id="passwordinput" name="password" style="width:300px;">
 					</div>
 				</div>
-					<div class="footer">
-						<p class="message">
-							No account? Use 'Guest' - '123'. 
-						</p>
-						<p class="loginbutton">
-							<input class="btn btn-success" type="submit" name="go" value="Login" />
-						</p>
-					</div>
+				<div class="footer">
+					<p class="message">
+						No account? Use 'Guest' - '123'. 
+					</p>
+					<p class="loginbutton">
+						<input class="btn btn-success" type="submit" name="go" value="Login" />
+					</p>
+				</div>
 				</fieldset>
 			</form>
+			<div class="loading">
+				<div class="progress progress-success progress-striped active">
+				  <div class="bar" style="width: 0%"></div>
+				</div>
+<!-- 				<p class="startButton">
+					<button class="btn btn-success" type="button">Begin!</button>
+				</p> -->
+			</div>
 		</div>
 	</div>
 		<!-- <div id="imagec"><img src="https://services.sapo.pt/Codebits/botmake/01,,,03,06,03,07,08," width="60" height="60" id="imageid"></img></div> -->
@@ -62,11 +70,92 @@
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/Keys.js"></script>
 		<script type="text/javascript" src="js/Player.js"></script>
+		
 	<script  type="text/javascript">
+			var map = {};
 		$(document).ready(function(){
-		//init them all
-			//Game.GameStart();
-			//alert('hi')
+			$("#container").hide();
+			$("#login").show();
+			$("#email").focus();
+			//startGame();
 		});
+		function validate(){
+			logged = false;
+			var email = $('#emailinput').val();  
+			var pwd = $('#passwordinput').val(); 
+			
+			if(email.toLowerCase() == 'guest' && pwd == '123')
+			{
+				//login is a WIP
+				
+				//load assets
+ 				$(".auth-details").fadeOut('fast')
+				$(".footer").fadeOut('fast',function(){
+					$(".loading").fadeIn('fast', function(){LoadAssets()});
+					LoadAssets();
+				})				
+
+				//start the game
+				//startGame();
+			}
+			else
+				alert('opsi')
+		}
+		
+		function startGame(){
+			$("#login").fadeOut('slow',function(){$("#container").show('slow');});
+			Game.GameStart();		
+		}
+
+		function LoadAssets(){
+			var queue;
+			
+			queue = [
+				"assets/img/img/body/1.png",
+				"assets/img/img/body/2.png",
+				"assets/img/img/body/3.png",
+				"assets/img/img/body/4.png",
+				"assets/img/img/body/5.png",
+				"assets/img/img/body/6.png",
+				"assets/img/img/body/7.png",
+				"assets/img/img/body/8.png",
+				"assets/img/img/body/9.png",
+			];
+			
+			loadImages(queue,finish);
+			
+		}
+		
+		function loadImages(arr, callBack){
+		var count = 1;
+		 var img = [];
+			
+		 for(var i in arr ){
+		  img[i] = new Image();
+		  img[i].src = arr[i];
+		  map[arr[i]] = img[i] 
+		  img[i].onload = function(){
+			var prog = Math.round((count * 100)/arr.length);
+			console.log(prog)
+			$(".progress .bar").css("width",prog + "%");
+			count++
+			
+		   if(count == arr.length){
+			   setTimeout(function(){
+						callBack(img);
+					}, 1000);			
+		   }
+		  }
+		  img[i].onerror = img[i].onload
+		 }
+		} 
+		
+		function finish(map){
+			startGame()
+		}
+		
+		
+		
+
 	</script>
  </html>

@@ -15,7 +15,7 @@ var Game = new function(){
 		keys = initInput();
 		localPlayer = initPlayer();
 		newimg = new Image();
-		newimg.src="assets/parts/body/1.png"
+		newimg.src="assets/sprites/master.png"
 		newimg.onload = function(){
 			localPlayer.setImg(newimg);
 		}
@@ -41,6 +41,7 @@ var Game = new function(){
 		canvas = document.getElementById("gameCanvas");
 		ctx = canvas.getContext("2d");
 		
+		
 		return ctx;
 	}
 	function initInput(){
@@ -54,7 +55,7 @@ var Game = new function(){
 	function initPlayer(){
 		var startX = Math.round(Math.random()*(canvas.width-5)),
 		startY = Math.round(Math.random()*(canvas.height-5));
-		return (new Player(startX, startY));
+		return (new Player(startX, startY, canvas.width, canvas.height));
 	}
 
 

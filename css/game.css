@@ -9,13 +9,27 @@
     border-radius: 15px;
     margin:10px 0px 0px 10px;
 }
+#container {
+	padding-top:50px;
+	margin:0 auto;
+	width:800px;
+	height:400px;
+}
 canvas {
     display: block;
-    width:880px;
-    height: 500px;
-    border:1px solid black;
+	background-color:whitesmoke;
+	border:3px solid gray;
     -moz-border-radius: 15px;
     border-radius: 15px;
+	
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit
+                                                //  (Safari now, Chrome soon)
+    image-rendering: optimize-contrast;         // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;   // IE
+	
+	-webkit-transform-style: preserve-3d;
 }
 /* Area with TextArea */
 .code

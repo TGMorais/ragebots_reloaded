@@ -1,17 +1,6 @@
 /* Center the container */
-#container {
-	padding-top:50px;
-	margin:0 auto;
-	width:800px;
-	height:400px;
-}
+
 /* Give canvas a background */
 canvas {
-	border:1px solid gray;
-    image-rendering: optimizeSpeed;             // Older versions of FF
-    image-rendering: -moz-crisp-edges;          // FF 6.0+
-    image-rendering: -webkit-optimize-contrast; // Webkit
-                                                //  (Safari now, Chrome soon)
-    image-rendering: optimize-contrast;         // Possible future browsers.
-    -ms-interpolation-mode: nearest-neighbor;   // IE
+
 }

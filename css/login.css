@@ -26,7 +26,12 @@ body {
 	color:#7F7F7F;
 	font-size:14px;
 }
-
+.loading{
+	display:none;
+	margin: 70px auto;
+	width:80%;
+}
+.loading .startButton{display:none}
 #logininput, #login textarea {
     background: none repeat scroll 0 0 #8A9483;
     border: 1px solid #C3D5A4;
