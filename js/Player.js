@@ -80,6 +80,7 @@ var Player = function(startX, startY, bw, bh) {
 			if(((now - lastshot)/1000) >= reloadtime){
 				//console.log('time passed: ' + ((now - lastshot)/1000) + ' reloadtime: ' +reloadtime)
 				var nb = new Bullet(midPoint()._x,midPoint()._y,id,flip);
+				nb.setImg(rsxManager.getItem("assets/sprites/bullets.png"))
 				bullets.push(nb);
 				lastshot = new Date().getTime();
 			}

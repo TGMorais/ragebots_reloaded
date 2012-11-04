@@ -40,7 +40,6 @@ var AssetManager =  function(manifest){
 			tmpImg = new Image();
 			tmpImg.src = manifest[i];
 			tmpImg.onload = function(){
-				map[manifest[i]] = tmpImg //load to cache
 				//prog = Math.round((count * 100)/manifest.length);
 				setProgress(count)
 				onprogress(prog);
@@ -54,8 +53,10 @@ var AssetManager =  function(manifest){
 				onprogress(prog);
 				count++;
 				errors.push(tmpImg.src)
+				delete map[manifest[i]];
 				if(count-1 == manifest.length) onfinish(errors);
 			}
+			map[manifest[i]] = tmpImg //load to cache
 		}
 	}
 	

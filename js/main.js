@@ -1,7 +1,6 @@
 //Game variables
-var Game = function(resources){
-	var rsxManager = resources || undefined,
-		localPlayer,
+var Game = function(){
+	var localPlayer,
 		canvas,
 		ctx,
 		lastRun,
@@ -12,9 +11,6 @@ var Game = function(resources){
 	
 	// START NEW GAME	
 	this.GameStart = function(){
-		if (rsxManager == undefined){
-			rsxManager = new AssetManager();
-		}
 		ctx = initCanvas();
 		keys = initInput();
 		localPlayer = initPlayer();

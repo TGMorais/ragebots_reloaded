@@ -83,6 +83,7 @@ var Bullet = function(startX, startY, playerID, flip) {
     var draw = function(ctx) {
 		ctx.clearRect(old_x-1, old_y-1, width+2, height+2);
 		if(alive) ctx.fillRect(x,y,width,height);
+		//ctx.drawImage(img,width*id,flip,width,height,0,0,width,height);
 	}
 
 	var die = function(){

@@ -68,14 +68,9 @@
 		<!-- <div id="imagec"><img src="https://services.sapo.pt/Codebits/botmake/01,,,03,06,03,07,08," width="60" height="60" id="imageid"></img></div> -->
 	</body>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/Keys.js"></script>
-		<script type="text/javascript" src="js/Player.js"></script>
-		<script type="text/javascript" src="js/AssetLoader.js"></script>
-		<script type="text/javascript" src="js/Bullet.js"></script>
-		
 	<script  type="text/javascript">
-			var map = {};
+		//var map = {};
+		var rsxManager; //global asset manager
 		$(document).ready(function(){
 			$("#container").hide();
 			$("#login").show();
@@ -104,12 +99,12 @@
 				alert('opsi')
 		}
 		
-		function startGame(rsxManager){
+		function startGame(){
 			
 			
 			setTimeout(function(){
 				$("#login").fadeOut('slow',function(){$("#container").show('slow')});
-				ragebots = new Game(rsxManager);
+				ragebots = new Game();
 				ragebots.GameStart();	
 			}, 1500);	
 			
@@ -123,7 +118,8 @@
 			var queue;
 			
 			queue = [
-				"assets/sprites/master.png"
+				"assets/sprites/master.png",
+				"assets/sprites/bullet.png"
 			];
 			
 			rsxManager = new AssetManager(queue);
@@ -137,4 +133,10 @@
 			
 		}
 	</script>
+
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/Keys.js"></script>
+		<script type="text/javascript" src="js/Player.js"></script>
+		<script type="text/javascript" src="js/AssetLoader.js"></script>
+		<script type="text/javascript" src="js/Bullet.js"></script>
  </html>
