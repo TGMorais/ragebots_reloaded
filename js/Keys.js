@@ -6,6 +6,7 @@ var Keys = function(up, left, right, down) {
 		left = left || false,
 		right = right || false,
 		down = down || false;
+		space = false;
 		
 	var onKeyDown = function(e) {
 		var that = this,
@@ -23,6 +24,9 @@ var Keys = function(up, left, right, down) {
 				break;
 			case 40: // Down
 				that.down = true;
+				break;
+			case 32:
+				that.space = true;
 				break;
 		};
 	};
@@ -43,6 +47,8 @@ var Keys = function(up, left, right, down) {
 			case 40: // Down
 				that.down = false;
 				break;
+			case 32: //space
+				that.space = false;
 		};
 	};
 	
@@ -55,6 +61,7 @@ var Keys = function(up, left, right, down) {
 		left: left,
 		right: right,
 		down: down,
+		space: space,
 		onKeyDown: onKeyDown,
 		onKeyUp: onKeyUp,
 		reset: reset

@@ -15,6 +15,9 @@ var Player = function(startX, startY, bw, bh) {
 		height = 30,
         moveAmount = 150,
 		bodyParts = [1,1,1,1,1,1,1,1],
+		bullets = [],
+		reloadtime = 0.3,
+		lastshot = reloadtime,
 		img = new Image();
 		
 	var buffer = document.createElement('canvas');
@@ -58,25 +61,44 @@ var Player = function(startX, startY, bw, bh) {
     };
 
     var update = function(Keys,delta, canvas) {
-			old_x = x;
-			old_y = y;
-			if(Keys.left){ // Left
-				x  -= ((x>=0) ? (moveAmount *  delta):0)
-				flip = 0;
+		old_x = x;
+		old_y = y;
+		if(Keys.left){ // Left
+			x  -= ((x>=0) ? (moveAmount *  delta):0)
+			flip = 0;
+		}
+		if(Keys.up) // Left				break;
+			y -= ((y>=0) ? (moveAmount *  delta):0);
+		if(Keys.down) // Left
+			y += ((y+height<=canvas.height) ? (moveAmount *  delta):0)
+		if(Keys.right){ // Left
+			x += ((x + width <= canvas.width )?(moveAmount *  delta) :0);
+			flip = 30;
+		}
+		if(Keys.space){
+			var now = new Date().getTime();
+			if(((now - lastshot)/1000) >= reloadtime){
+				//console.log('time passed: ' + ((now - lastshot)/1000) + ' reloadtime: ' +reloadtime)
+				var nb = new Bullet(midPoint()._x,midPoint()._y,id,flip);
+				bullets.push(nb);
+				lastshot = new Date().getTime();
 			}
-			if(Keys.up) // Left				break;
-				y -= ((y>=0) ? (moveAmount *  delta):0);
-			if(Keys.down) // Left
-				y += ((y+height<=canvas.height) ? (moveAmount *  delta):0)
-			if(Keys.right){ // Left
-				x += ((x + width <= canvas.width )?(moveAmount *  delta) :0);
-				flip = 30;
-			}
-			 x = (x + .5) | 0;
-			 y = (y + .5) | 0;
+		}
+		 x = (x + .5) | 0;
+		 y = (y + .5) | 0
+			 
+		//update bullets
+		for(a = 0; a< bullets.length;a++){
+			var b = bullets[a];
+			b.update(delta,canvas);
+ 			if(!b.isInBounds()){
+				b.die();
+				console.log('bullet died')
+			} 
+		}
     };
 	
-	  var colision = function(object) {
+	var colision = function(object) {
     };
 
     var draw = function(ctx, delta) {
@@ -85,8 +107,18 @@ var Player = function(startX, startY, bw, bh) {
 		//ctx.fillRect(x,y,width,height);
 		buffer = setRect();
 		ctx.drawImage(buffer,x,y);
+		
+		//draw bullets
+		for(a = 0; a< bullets.length;a++){
+			var b = bullets[a];
+			b.draw(ctx);
+			if(!b.isAlive()){
+				bullets.splice(a,1);
+				a--
+			}
+		}
 	}
-	
+
 	var setRect = function(){
 		cbuffer.clearRect(0,0,bw,bh);
 		if(img.src == "" || id>=25){
@@ -95,6 +127,16 @@ var Player = function(startX, startY, bw, bh) {
 			cbuffer.drawImage(img,width*id,flip,width,height,0,0,width,height);
 		}	
 		return buffer;
+	}
+	
+	//get bullet exit point
+	var midPoint =  function(){
+		var _x = (!flip) ? x : x+width;
+		var _y = y + (height/2);
+		return{
+			_x : _x,
+			_y : _y
+		}
 	}
 
     // Define which variables and methods can be accessed

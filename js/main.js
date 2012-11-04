@@ -1,6 +1,7 @@
 //Game variables
-var Game = new function(){
-	var localPlayer,
+var Game = function(resources){
+	var rsxManager = resources || undefined,
+		localPlayer,
 		canvas,
 		ctx,
 		lastRun,
@@ -11,20 +12,24 @@ var Game = new function(){
 	
 	// START NEW GAME	
 	this.GameStart = function(){
+		if (rsxManager == undefined){
+			rsxManager = new AssetManager();
+		}
 		ctx = initCanvas();
 		keys = initInput();
 		localPlayer = initPlayer();
-		newimg = new Image();
+		localPlayer.setImg(rsxManager.getItem("assets/sprites/master.png"));
+/* 		newimg = new Image();
 		newimg.src="assets/sprites/master.png"
 		newimg.onload = function(){
 			localPlayer.setImg(newimg);
-		}
+		} */
 		
 		//begin game loop
 		lastRun =  new Date().getTime();
 		loop();
 	}
-
+		
 	// INIT CANVAS
 	function initCanvas(){
 		  window.requestAnimFrame = (function(callback) {
@@ -63,7 +68,6 @@ var Game = new function(){
 	// Keyboard key down
 	function onKeydown(e) {
 		if (localPlayer) {
-			
 			keys.onKeyDown(e);
 		};
 	};

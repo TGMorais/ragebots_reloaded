@@ -58,6 +58,7 @@
 				<div class="progress progress-success progress-striped active">
 				  <div class="bar" style="width: 0%"></div>
 				</div>
+				<p class="errmsg">loading..</p>
 <!-- 				<p class="startButton">
 					<button class="btn btn-success" type="button">Begin!</button>
 				</p> -->
@@ -70,6 +71,8 @@
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/Keys.js"></script>
 		<script type="text/javascript" src="js/Player.js"></script>
+		<script type="text/javascript" src="js/AssetLoader.js"></script>
+		<script type="text/javascript" src="js/Bullet.js"></script>
 		
 	<script  type="text/javascript">
 			var map = {};
@@ -92,7 +95,6 @@
  				$(".auth-details").fadeOut('fast')
 				$(".footer").fadeOut('fast',function(){
 					$(".loading").fadeIn('fast', function(){LoadAssets()});
-					LoadAssets();
 				})				
 
 				//start the game
@@ -102,60 +104,37 @@
 				alert('opsi')
 		}
 		
-		function startGame(){
-			$("#login").fadeOut('slow',function(){$("#container").show('slow');});
-			Game.GameStart();		
+		function startGame(rsxManager){
+			
+			
+			setTimeout(function(){
+				$("#login").fadeOut('slow',function(){$("#container").show('slow')});
+				ragebots = new Game(rsxManager);
+				ragebots.GameStart();	
+			}, 1500);	
+			
+			//Start the game
+
 		}
 
+		
+		//LOAD GAME ASSETS on login
 		function LoadAssets(){
 			var queue;
 			
 			queue = [
-				"assets/img/img/body/1.png",
-				"assets/img/img/body/2.png",
-				"assets/img/img/body/3.png",
-				"assets/img/img/body/4.png",
-				"assets/img/img/body/5.png",
-				"assets/img/img/body/6.png",
-				"assets/img/img/body/7.png",
-				"assets/img/img/body/8.png",
-				"assets/img/img/body/9.png",
+				"assets/sprites/master.png"
 			];
 			
-			loadImages(queue,finish);
+			rsxManager = new AssetManager(queue);
+			rsxManager.onprogress(function(count){
+					$(".progress .bar").css("width",count + "%");
+				});
+			rsxManager.onfinish(function(){
+					startGame(rsxManager);
+				});
+			rsxManager.loadAssets();
 			
 		}
-		
-		function loadImages(arr, callBack){
-		var count = 1;
-		 var img = [];
-			
-		 for(var i in arr ){
-		  img[i] = new Image();
-		  img[i].src = arr[i];
-		  map[arr[i]] = img[i] 
-		  img[i].onload = function(){
-			var prog = Math.round((count * 100)/arr.length);
-			console.log(prog)
-			$(".progress .bar").css("width",prog + "%");
-			count++
-			
-		   if(count == arr.length){
-			   setTimeout(function(){
-						callBack(img);
-					}, 1000);			
-		   }
-		  }
-		  img[i].onerror = img[i].onload
-		 }
-		} 
-		
-		function finish(map){
-			startGame()
-		}
-		
-		
-		
-
 	</script>
  </html>
