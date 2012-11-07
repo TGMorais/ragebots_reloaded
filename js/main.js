@@ -1,6 +1,7 @@
 //Game variables
 var Game = function(){
 	var localPlayer,
+		remotePlayers = [],
 		canvas,
 		ctx,
 		lastRun,
@@ -15,6 +16,7 @@ var Game = function(){
 		keys = initInput();
 		localPlayer = initPlayer();
 		localPlayer.setImg(rsxManager.getItem("assets/sprites/master.png"));
+		
 /* 		newimg = new Image();
 		newimg.src="assets/sprites/master.png"
 		newimg.onload = function(){
@@ -84,6 +86,10 @@ var Game = function(){
 		
 		localPlayer.update(keys, delta, canvas);
 		
+		for(var p=0;p<remotePlayers.length;p++){
+			remotePlayers[p].update(keys,delta,canvas);
+		}
+		
 		//go around
 		window.requestAnimFrame(loop);
 		inc += 1;
@@ -91,8 +97,12 @@ var Game = function(){
 		//draw
 		
 		//ctx.clearRect(0, 0, canvas.width, canvas.height);
-		if(show_fps) {console.log("FPS:" +  fps + " DELTA: " + delta + "ms - " + inc); drawFPS();}
+		if(show_fps) {/*console.log("FPS:" +  fps + " DELTA: " + delta + "ms - " + inc); */drawFPS();}
 		localPlayer.draw(ctx);
+		
+		for(var p=0;p<remotePlayers.length;p++){
+			remotePlayers[p].draw(ctx);
+		}
 
 	
 	}

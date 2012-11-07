@@ -91,7 +91,7 @@ var Player = function(startX, startY, bw, bh) {
 		//update bullets
 		for(a = 0; a< bullets.length;a++){
 			var b = bullets[a];
-			b.update(delta,canvas);
+			b.update(delta,canvas,flip);
  			if(!b.isInBounds()){
 				b.die();
 				console.log('bullet died')
@@ -132,8 +132,8 @@ var Player = function(startX, startY, bw, bh) {
 	
 	//get bullet exit point
 	var midPoint =  function(){
-		var _x = (!flip) ? x : x+width;
-		var _y = y + (height/2);
+		var _x = (flip<30) ? x  : x+width;
+		var _y = y +(height/2);
 		return{
 			_x : _x,
 			_y : _y

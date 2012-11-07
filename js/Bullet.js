@@ -8,12 +8,17 @@ var Bullet = function(startX, startY, playerID, flip) {
         y = startY,
 		old_x = 0,
 	    old_y = 0,
-		width =5,
-		height = 5,
+		width =14,
+		height = 12,
         moveAmount = 250,
 		alive = true,
 		inBounds = true,
+		msPerFrame = 25,
+		acDelta = 0,
+		lastUpdate = 0,
 		xVel = (flip>0) ? moveAmount : -moveAmount,
+		frame = (flip<30) ? 4 : 5,
+		drawOffset = (flip<30)? width : 0
 		bowner = playerID,
 		img = new Image();
 		
@@ -59,31 +64,31 @@ var Bullet = function(startX, startY, playerID, flip) {
 			old_x = x;
 			old_y = y;
 			x +=(xVel *  delta)
-/* 			if(Keys.left){ // Left
-				x  -= ((x>=0) ? (moveAmount *  delta):0)
-				flip = 0;
-			}
-			if(Keys.up) // Left				break;
-				y -= ((y>=0) ? (moveAmount *  delta):0);
-			if(Keys.down) // Left
-				y += ((y+height<=canvas.height) ? (moveAmount *  delta):0)
-			if(Keys.right){ // Left
-				x += ((x + width <= canvas.width )?(moveAmount *  delta) :0);
-				flip = 30;
-			} */
-			 x = (x + .5) | 0;
+ 			 x = (x + .5) | 0;
 			 y = (y + .5) | 0;
-			 
-		inBounds = ((x>=0 && (x+width <= canvas.width)));
+			 /*
+			 if(acDelta > msPerFrame){
+				acDelta = 0;
+				frame++;
+				if(frame > 5) frame = 0;
+			 }
+			 else{
+				acDelta += (delta*100);
+				console.log(acDelta);
+			 } */
+
+		inBounds = ((x>=0 && (x+width <= canvas.width+width)));
     };
 	
 	 var colision = function(object) {
     };
 
     var draw = function(ctx) {
-		ctx.clearRect(old_x-1, old_y-1, width+2, height+2);
-		if(alive) ctx.fillRect(x,y,width,height);
-		//ctx.drawImage(img,width*id,flip,width,height,0,0,width,height);
+		//ctx.clearRect(old_x-1, old_y-1, width+2, height+2);
+		ctx.clearRect(old_x-1-(drawOffset), old_y-1-(height/2), width+2, height+2);
+		//if(alive) ctx.fillRect(x,y,width,height);
+		ctx.drawImage(img,13*frame,0,width,height,x-(drawOffset),y-(height/2),width,height);
+		//ctx.drawImage(img,x,y,24,12); 
 	}
 
 	var die = function(){
