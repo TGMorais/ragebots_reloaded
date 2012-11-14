@@ -1,0 +1,8 @@
+{
+  "name": "ragebots_reloaded",
+  "version": "1.0.0",
+  "dependencies": {
+    "socket.io": "0.8.7",
+    "express": "2.5.9"
+  }
+}
